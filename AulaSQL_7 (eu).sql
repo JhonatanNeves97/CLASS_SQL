@@ -32,8 +32,11 @@ id INT NOT NULL AUTO_INCREMENT
 );
 
 INSERT INTO estado (id,nome,sigla,ativo,data_cadastro) VALUES (1,'SÃO PAULO','SP','S','2024/11/19');
+INSERT INTO estado (id,nome,sigla,ativo,data_cadastro) VALUES (2,'RIO DE JANEIRO','RJ','S','2024/11/19');
+INSERT INTO estado (id,nome,sigla,ativo,data_cadastro) VALUES (3,'ESPÍRITO SANTO','ES','S','2024/11/19');
 INSERT INTO estado VALUES (DEFAULT,'PARANÁ','PR', DEFAULT, DEFAULT); -- DEFAULT pode ocupar espaço e se tiver todos completos não precisa colocar os nomes antes dos valores
-INSERT INTO estado (nome,sigla) VALUES ('MATO GROSSO','MT');
+INSERT INTO estado (nome,sigla) VALUES ('AMAZONIA','AM');
+INSERT INTO estado (nome,sigla) VALUES ('SANTA CATARINA','SC');
 
 SELECT id,nome,sigla,ativo,data_cadastro FROM estado;
 
@@ -44,23 +47,23 @@ INSERT INTO cidade (estado_id, nome) VALUES (1,'FERNANDÓPOLIS'); -- pode altera
 SELECT * FROM cidade;
 
 -- ALTER TABLE estado ADD COLUMN regiao INT;
--- ALTER TABLE estado ADD COLUMN regiao VARCHAR(100) NOT NULL DEFAULT 'valor nao informado';
--- ALTER TABLE estado MODIFY COLUMN regiao VARCHAR(100) NOT NULL DEFAULT 'valor nao informado' AFTER sigla;
--- ALTER TABLE estado DROP COLUMN regiao_estado;
--- ALTER TABLE estado CHANGE regiao regiao_estado VARCHAR(100) NOT NULL DEFAULT 'valor nao informado';
+ALTER TABLE estado ADD COLUMN regiao VARCHAR(100) NOT NULL DEFAULT 'valor nao informado';
+ALTER TABLE estado MODIFY COLUMN regiao VARCHAR(100) NOT NULL DEFAULT 'valor nao informado' AFTER sigla;
+ALTER TABLE estado CHANGE regiao regiao_estado VARCHAR(100) NOT NULL DEFAULT 'valor nao informado';
+ALTER TABLE estado DROP COLUMN regiao_estado;
 -- para decidir a posição escreve FIRST ou AFTER (nome da coluna)
 
 ALTER TABLE estado DROP CONSTRAINT estado_ativo_deve_ser_S_ou_N;
 ALTER TABLE estado MODIFY COLUMN ativo ENUM ('S','N');
 
--- UPDATE estado SET nome = 'São Paulo' WHERE id = 1;
--- UPDATE estado SET nome = 'SÃO PAULO', ativo = 'N' WHERE id = 1;
+UPDATE estado SET nome = 'São Paulo' WHERE id = 1;
+UPDATE estado SET nome = 'SÃO PAULO', ativo = 'N' WHERE id = 1;
 -- UPDATE estado SET ativo = 'S'; -- proteção ativada
--- UPDATE cidade SET ativo = 'N' WHERE estado_id = 1;
--- UPDATE cidade SET ativo = 'S' WHERE estado_id = 1 AND data_cadastro >= '2022-01-01';
+UPDATE cidade SET ativo = 'N' WHERE estado_id = 1;
+UPDATE cidade SET ativo = 'S' WHERE estado_id = 1 AND data_cadastro >= '2022-01-01';
  
--- DELETE FROM estado WHERE id = 1;
--- DELETE FROM cidade WHERE estado_id = 1;
+DELETE FROM cidade WHERE id = 1;
+DELETE FROM cidade WHERE estado_id = 1;
 -- DELETE FROM cidade; -- proteção ativada
 
 -- DESCRIBE estado;
